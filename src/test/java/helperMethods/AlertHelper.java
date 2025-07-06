@@ -28,16 +28,15 @@ public class AlertHelper {
 
     public void dismissAlert(){
         waitAlert();
-        Alert alert = driver.switchTo().alert();
-        alert.dismiss();
-
+        Alert alertOkCancel = driver.switchTo().alert();
+        alertOkCancel.dismiss();
     }
 
     public void fillAlert(String text){
         waitAlert();
-        Alert alertPrompt = driver.switchTo().alert();
-        alertPrompt.sendKeys(text);
-        alertPrompt.accept();
-
+        Alert alertWithText = driver.switchTo().alert();
+        alertWithText.sendKeys(text);
+        alertWithText.accept();
     }
+
 }

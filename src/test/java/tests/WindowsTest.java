@@ -1,58 +1,45 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+import helperMethods.ElementHelper;
+import helperMethods.TabHelper;
 import sharedData.SharedData;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WindowsTest extends SharedData {
 
-
-
     @Test
-    public void TestMethod() {
+    public void testMethod(){
 
+        ElementHelper elementHelper = new ElementHelper(driver);
+        TabHelper tabHelper = new TabHelper(driver);
 
-        WebElement alertsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        alertsMenu.click();
+        WebElement alertsFramesWindowsMenu = driver.findElement(By.xpath("//h5[text() = 'Alerts, Frame & Windows']"));
+        elementHelper.clickJSElement(alertsFramesWindowsMenu);
 
-        WebElement alertsSubMenu = driver.findElement(By.xpath("//span[text()='Browser Windows']"));
-        alertsSubMenu.click();
+        WebElement browserWindowSubmenu = driver.findElement(By.xpath("//span[text() = 'Browser Windows']"));
+        elementHelper.clickJSElement(browserWindowSubmenu);
 
-        WebElement newTabElement = driver.findElement(By.id("tabButton"));
-        newTabElement.click();
-        System.out.println(driver.getCurrentUrl());
+        WebElement newTabButton = driver.findElement(By.id("tabButton"));
+        elementHelper.clickJSElement(newTabButton);
 
-        List<String> tabsList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabsList.get(1));
-        System.out.println(driver.getCurrentUrl());
+        tabHelper.switchToSpecificTab(1);
 
-        driver.close();
-        driver.switchTo().window(tabsList.get(0));
-        System.out.println(driver.getCurrentUrl());
+        tabHelper.closeCurrentTab();
 
-        //din cauza reclamei fortam site-ul sa acceseze un url specific
-        driver.navigate().to("https://demoqa.com/browser-windows");
+        tabHelper.switchToSpecificTab(0);
 
-        WebElement newWindowElement = driver.findElement(By.id("windowButton"));
-        newWindowElement.click();
-        System.out.println(driver.getCurrentUrl());
+        WebElement newWindowButton = driver.findElement(By.id("windowButton"));
+        elementHelper.clickJSElement(newWindowButton);
 
-        List<String> windowsList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(windowsList.get(1));
+        tabHelper.switchToSpecificTab(1);
+        tabHelper.closeCurrentTab();
+        tabHelper.switchToSpecificTab(0);
 
-        System.out.println(driver.getCurrentUrl());
-
-        driver.close();
-        driver.switchTo().window(windowsList.get(0));
-        System.out.println(driver.getCurrentUrl());
-
-        driver.quit();
     }
 }

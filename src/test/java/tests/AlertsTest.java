@@ -2,37 +2,36 @@ package tests;
 
 import helperMethods.AlertHelper;
 import helperMethods.ElementHelper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
+import helperMethods.PageHelper;
 import sharedData.SharedData;
+import org.openqa.selenium.*;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class AlertsTest extends SharedData {
 
-
     @Test
-    public void AlertsTestMethod(){
+    public void testMethod() {
 
         ElementHelper elementHelper = new ElementHelper(driver);
         AlertHelper alertHelper = new AlertHelper(driver);
+        PageHelper pageHelper = new PageHelper(driver);
 
+        WebElement alertsFramesWindowsMenu = driver.findElement(By.xpath("//h5[text() = 'Alerts, Frame & Windows']"));
+        elementHelper.clickJSElement(alertsFramesWindowsMenu);
 
-        WebElement alertsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        elementHelper.clickJSElement(alertsMenu);
-
-        WebElement alertsElement = driver.findElement(By.xpath("//span[text()='Alerts']"));
+        WebElement alertsElement = driver.findElement(By.xpath("//span[text() = 'Alerts']"));
         elementHelper.clickJSElement(alertsElement);
 
-        WebElement alertOkbuttonElement = driver.findElement(By.id("alertButton"));
-        elementHelper.clickElement(alertOkbuttonElement);
+        WebElement alertOkButtonElement = driver.findElement(By.id("alertButton"));
+        elementHelper.clickJSElement(alertOkButtonElement);
 
         alertHelper.acceptAlert();
-        //pt cancel .dismiss();
 
         WebElement alertWaitButtonElement = driver.findElement(By.id("timerAlertButton"));
-        elementHelper.clickElement(alertWaitButtonElement);
+        elementHelper.clickJSElement(alertWaitButtonElement);
 
-        //wait explicit pentru alerta
         alertHelper.acceptAlert();
 
         WebElement alertOkCancelElement = driver.findElement(By.id("confirmButton"));
@@ -40,11 +39,11 @@ public class AlertsTest extends SharedData {
 
         alertHelper.dismissAlert();
 
-        WebElement alertPromptElement = driver.findElement(By.id("promtButton"));
-        elementHelper.clickElement(alertPromptElement);
+        WebElement alertWithTextElement = driver.findElement(By.id("promtButton"));
+        elementHelper.clickJSElement(alertWithTextElement);
 
-        alertHelper.fillAlert("Vlad");
+        alertHelper.fillAlert("ceva text");
 
+        pageHelper.scrollPage(0,400);
     }
-
 }
