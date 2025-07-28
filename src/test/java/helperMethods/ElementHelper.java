@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ElementHelper {
 
-    public WebDriver driver;
+    private WebDriver driver;
 
     public ElementHelper(WebDriver driver) {
         this.driver = driver;

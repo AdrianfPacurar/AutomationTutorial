@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class AlertHelper {
 
-    public WebDriver driver;
+    private WebDriver driver;
 
     public AlertHelper(WebDriver driver) {
         this.driver = driver;
