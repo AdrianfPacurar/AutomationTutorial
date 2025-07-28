@@ -2,25 +2,27 @@ package tests;
 
 import org.testng.annotations.Test;
 import pages.AlertFrameWindowPage;
+import pages.FramesPage;
 import pages.IndexPage;
-import pages.WindowsPage;
 import sharedData.SharedData;
 
-public class WindowsTest extends SharedData {
+public class FramesTest extends SharedData {
 
 
 
     @Test
-    public void TestMethod() {
+    public void AlertsTestMethod() {
+
 
         IndexPage indexPage = new IndexPage(getDriver());
         indexPage.interactOnAlertsFrameWindowMenu();
-        AlertFrameWindowPage alertFrameWindowPage = new AlertFrameWindowPage(getDriver());
-        alertFrameWindowPage.interactWithWindowsSubMenu();
 
-        WindowsPage windowsPage = new WindowsPage(getDriver());
-        windowsPage.dealWithNewTab();
-        windowsPage.dealWithNewWindow();
+        AlertFrameWindowPage alertFrameWindowPage = new AlertFrameWindowPage(getDriver());
+        alertFrameWindowPage.interactWithFramesSubMenu();
+
+        FramesPage framesPage = new FramesPage(getDriver());
+        framesPage.dealWithBigIFrame();
+        framesPage.dealWithLittleIFrame();
 
     }
 }
